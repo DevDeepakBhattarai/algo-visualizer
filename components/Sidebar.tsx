@@ -40,12 +40,13 @@ export default function Component() {
                 Sorting Algorithm
               </Label>
               <Select
+                defaultValue={"bubble"}
                 onValueChange={(value: Algorithms) => {
                   setSortingAlgorithm(value);
                 }}
               >
                 <SelectTrigger id="algorithm">
-                  <SelectValue placeholder="Select Algorithm" />
+                  <SelectValue></SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="bubble">Bubble Sort</SelectItem>
