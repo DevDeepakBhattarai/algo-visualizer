@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} dark`}>
-        <main className="flex flex-col lg:flex-row gap-4">
+        <main className="flex flex-col lg:flex-row">
           <Topbar></Topbar>
           <div className="lg:block hidden">
             <Sidebar></Sidebar>

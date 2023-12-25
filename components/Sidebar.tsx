@@ -47,7 +47,7 @@ export default function Component() {
                 <SelectTrigger id="algorithm">
                   <SelectValue placeholder="Select Algorithm" />
                 </SelectTrigger>
-                <SelectContent on position="popper">
+                <SelectContent position="popper">
                   <SelectItem value="bubble">Bubble Sort</SelectItem>
                   <SelectItem value="quick">Quick Sort</SelectItem>
                   <SelectItem value="merge">Merge Sort</SelectItem>
@@ -68,21 +68,36 @@ export default function Component() {
               </div>
 
               <Slider
-                onValueChange={() => {
-                  setLength(length);
+                onValueChange={(value) => {
+                  setLength(value[0]);
                 }}
                 value={[length]}
                 className="w-full"
                 id="arrayLength"
-                max={1000}
+                max={100}
               />
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="speed">
-                Speed
-              </Label>
-              <Slider className="w-full" id="speed" max={1000} />
+              <div className="flex justify-between">
+                <Label className="mb-2 font-medium" htmlFor="speed">
+                  Speed (shift/ms)
+                </Label>
+
+                <Label className="mb-2 font-medium" htmlFor="speed">
+                  {speed}
+                </Label>
+              </div>
+
+              <Slider
+                onValueChange={(value) => {
+                  setSpeed(value[0]);
+                }}
+                className="w-full"
+                id="speed"
+                value={[speed]}
+                max={5000}
+              />
             </div>
 
             <div className="flex flex-col">
@@ -90,6 +105,9 @@ export default function Component() {
                 Color
               </Label>
               <Input
+                onChange={(e) => {
+                  setColor(e.target.value);
+                }}
                 className="w-full h-10"
                 id="color"
                 type="color"
@@ -98,35 +116,43 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="soundRightToLeft">
-                Sound - Right to Left
+              <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
+                Sound - Left to Right
               </Label>
-
-              <Select>
+              <Select
+                onValueChange={(value) => {
+                  setLeftToRightSound(value);
+                }}
+              >
                 <SelectTrigger id="algorithm">
                   <SelectValue placeholder="Select Algorithm" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="bubble">1</SelectItem>
                   <SelectItem value="quick">2</SelectItem>
-                  <SelectItem value="merge">2</SelectItem>
+                  <SelectItem value="merge">3</SelectItem>
                   <SelectItem value="heap">4</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
-                Sound - Left to Right
+              <Label className="mb-2 font-medium" htmlFor="soundRightToLeft">
+                Sound - Right to Left
               </Label>
-              <Select>
+
+              <Select
+                onValueChange={(value) => {
+                  setRightToLeftSound(value);
+                }}
+              >
                 <SelectTrigger id="algorithm">
                   <SelectValue placeholder="Select Algorithm" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="bubble">1</SelectItem>
                   <SelectItem value="quick">2</SelectItem>
-                  <SelectItem value="merge">2</SelectItem>
+                  <SelectItem value="merge">3</SelectItem>
                   <SelectItem value="heap">4</SelectItem>
                 </SelectContent>
               </Select>
