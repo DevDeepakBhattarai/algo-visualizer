@@ -10,6 +10,7 @@ type Options = {
   color: string;
   leftToRightSound: string;
   rightToLeftSound: string;
+  isSorting: boolean;
 };
 
 type Actions = {
@@ -20,6 +21,7 @@ type Actions = {
   setColor: (color: string) => void;
   setLeftToRightSound: (sound: Options["leftToRightSound"]) => void;
   setRightToLeftSound: (sound: Options["rightToLeftSound"]) => void;
+  setIsSorting: (bool: boolean) => void;
 };
 
 export const useStore = create<Options & Actions>((set) => ({
@@ -29,7 +31,7 @@ export const useStore = create<Options & Actions>((set) => ({
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),
   length: 100,
   setLength: (length) => set(() => ({ length: length })),
-  speed: 1000 /* Provide default speed value here */,
+  speed: 100 /* Provide default speed value here */,
   setSpeed: (speed) => set(() => ({ speed: speed })),
   color: "#FFFFFF" /* Provide default color value here */,
   setColor: (color) => set(() => ({ color: color })),
@@ -37,4 +39,6 @@ export const useStore = create<Options & Actions>((set) => ({
   setLeftToRightSound: (sound) => set(() => ({ leftToRightSound: sound })),
   rightToLeftSound: "2" /* Provide default rightToLeftSound value here */,
   setRightToLeftSound: (sound) => set(() => ({ rightToLeftSound: sound })),
+  isSorting: false,
+  setIsSorting: (bool: boolean) => set(() => ({ isSorting: bool })),
 }));

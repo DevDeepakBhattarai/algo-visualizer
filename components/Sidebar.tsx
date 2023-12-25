@@ -169,12 +169,26 @@ export default function Component() {
 }
 
 export function UtilityButtons() {
+  const { isSorting, setIsSorting } = useStore();
   return (
     <div className="flex justify-between">
-      <Button className="mt-4" variant={"outline"}>
+      <Button
+        className="mt-4"
+        disabled={!isSorting}
+        onClick={() => {
+          setIsSorting(false);
+        }}
+        variant={"outline"}
+      >
         Stop
       </Button>
-      <Button type="submit" className="mt-4">
+      <Button
+        onClick={() => {
+          setIsSorting(true);
+        }}
+        disabled={isSorting}
+        className="mt-4"
+      >
         Start
       </Button>
     </div>
