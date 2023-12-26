@@ -30,7 +30,7 @@ export const useStore = create<Options & Actions>((set) => ({
   setArray: (array: Options["array"]) => set(() => ({ array: array })),
   sortingAlgorithm: null,
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),
-  length: 100,
+  length: 40,
   setLength: (length) => set(() => ({ length: length })),
   speed: 100 /* Provide default speed value here */,
   setSpeed: (speed) => set(() => ({ speed: speed })),

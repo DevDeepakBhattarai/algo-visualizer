@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} dark`}>
         <Toaster></Toaster>
-        <main className="flex flex-col lg:flex-row">
+        <main className="flex overflow-hidden justify-between flex-col lg:flex-row h-screen">
           <Topbar></Topbar>
           <div className="lg:block hidden">
             <Sidebar></Sidebar>

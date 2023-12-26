@@ -27,11 +27,11 @@ export default function Component() {
   } = useStore();
 
   return (
-    <main className="flex-row flex">
-      <aside className="max-w-4xl p-4 lg:p-6 lg:ring-white lg:ring-1 shadow h-max lg:h-screen">
+    <main className="flex-row flex w-full">
+      <aside className="lg:max-w-4xl lg:p-6 lg:ring-white w-full lg:ring-1 shadow h-max lg:h-screen">
         <div className="flex flex-col gap-6">
           <div className="border-b pb-4">
-            <h1 className=" text-xl lg:text-2xl font-semibold">
+            <h1 className="text-base md:text-xl lg:text-2xl font-semibold">
               Sorting Algorithm Visualizer
             </h1>
           </div>
@@ -188,13 +188,12 @@ export default function Component() {
               </Select>
             </div>
 
-            <div className="hidden lg:block">
+            <div className="hidden w-full lg:flex justify-between p-4 ">
               <UtilityButtons></UtilityButtons>
             </div>
           </div>
         </div>
       </aside>
-      <div className="flex-grow bg-white shadow rounded-lg" />
     </main>
   );
 }
@@ -203,10 +202,10 @@ export function UtilityButtons() {
   const { isSorting, setIsSorting, sortingAlgorithm } = useStore();
   const { toast } = useToast();
   return (
-    <div className="flex justify-between">
+    <div className="flex w-full items-center justify-between">
       <Button
         className="mt-4"
-        disabled={!isSorting}
+        disabled={true}
         onClick={() => {
           setIsSorting(false);
         }}
@@ -216,6 +215,7 @@ export function UtilityButtons() {
       </Button>
 
       <Button
+        type="submit"
         onClick={() => {
           if (!sortingAlgorithm) {
             toast({
