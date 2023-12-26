@@ -10,14 +10,15 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "./ui/slider";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import { Algorithms, useStore } from "@/lib/zustand-store";
+import { useStore } from "@/lib/zustand-store";
 import { useToast } from "./ui/use-toast";
 export default function Component() {
   const {
     setColor,
-    setLeftToRightSound,
     setLength,
-    setRightToLeftSound,
+    setSoundIterate,
+    setSoundElementFound,
+    setSoundSwap,
     setSortingAlgorithm,
     setSpeed,
 
@@ -50,10 +51,16 @@ export default function Component() {
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="bubble">Bubble Sort</SelectItem>
-                  <SelectItem value="quick">Quick Sort</SelectItem>
-                  <SelectItem value="merge">Merge Sort</SelectItem>
-                  <SelectItem value="count">Count Sort</SelectItem>
                   <SelectItem value="selection">Selection Sort</SelectItem>
+                  <SelectItem value="quick" disabled>
+                    Quick Sort
+                  </SelectItem>
+                  <SelectItem value="merge" disabled>
+                    Merge Sort
+                  </SelectItem>
+                  <SelectItem value="count" disabled>
+                    Count Sort
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -83,7 +90,7 @@ export default function Component() {
             <div className="flex flex-col">
               <div className="flex justify-between">
                 <Label className="mb-2 font-medium" htmlFor="speed">
-                  Speed (shift/ms)
+                  Speed (iteration/ms)
                 </Label>
 
                 <Label className="mb-2 font-medium" htmlFor="speed">
@@ -98,7 +105,7 @@ export default function Component() {
                 className="w-full"
                 id="speed"
                 value={[speed]}
-                max={5000}
+                max={1000}
               />
             </div>
 
@@ -119,46 +126,68 @@ export default function Component() {
 
             <div className="flex flex-col">
               <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
-                Sound - Left to Right
+                Sound - Iterate
               </Label>
               <Select
+                defaultValue="scale"
                 onValueChange={(value) => {
-                  setLeftToRightSound(value);
+                  setSoundIterate(value as Sound);
                 }}
               >
-                <SelectTrigger id="algorithm">
-                  <SelectValue placeholder="Select Algorithm" />
+                <SelectTrigger id="iterateSound">
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent position="popper">
-                  <SelectItem value="bubble">1</SelectItem>
-                  <SelectItem value="quick">2</SelectItem>
-                  <SelectItem value="merge">3</SelectItem>
-                  <SelectItem value="heap">4</SelectItem>
+                  <SelectItem value="ding">Ding</SelectItem>
+                  <SelectItem value="scale">Scale</SelectItem>
+                  <SelectItem value="windchime">Windchime</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex flex-col">
+              <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
+                Sound - Swap
+              </Label>
+              <Select
+                defaultValue="ding"
+                onValueChange={(value) => {
+                  setSoundSwap(value as Sound);
+                }}
+              >
+                <SelectTrigger id="swapSound">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="ding">Ding</SelectItem>
+                  <SelectItem value="scale">Scale</SelectItem>
+                  <SelectItem value="windchime">Windchime</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="flex flex-col">
               <Label className="mb-2 font-medium" htmlFor="soundRightToLeft">
-                Sound - Right to Left
+                Sound - Element Found
               </Label>
 
               <Select
+                defaultValue="windchime"
                 onValueChange={(value) => {
-                  setRightToLeftSound(value);
+                  setSoundElementFound(value as Sound);
                 }}
               >
-                <SelectTrigger id="algorithm">
-                  <SelectValue placeholder="Select Algorithm" />
+                <SelectTrigger id="elementFoundSound">
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent position="popper">
-                  <SelectItem value="bubble">1</SelectItem>
-                  <SelectItem value="quick">2</SelectItem>
-                  <SelectItem value="merge">3</SelectItem>
-                  <SelectItem value="heap">4</SelectItem>
+                  <SelectItem value="ding">Ding</SelectItem>
+                  <SelectItem value="scale">Scale</SelectItem>
+                  <SelectItem value="windchime">Windchime</SelectItem>
                 </SelectContent>
               </Select>
             </div>
+
             <div className="hidden lg:block">
               <UtilityButtons></UtilityButtons>
             </div>

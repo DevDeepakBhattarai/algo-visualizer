@@ -14,6 +14,9 @@ export default function Sort({}: Props): ReactElement {
   const {
     sortingAlgorithm,
     setArray,
+    soundElementFound,
+    soundIterate,
+    soundSwap,
     isSorting,
     color,
     array,
@@ -33,7 +36,10 @@ export default function Sort({}: Props): ReactElement {
             speed,
             startTransition,
             setIsSorting,
-            color
+            color,
+            soundIterate,
+            soundSwap,
+            soundElementFound
           );
           break;
         case "count":
@@ -83,7 +89,10 @@ export default function Sort({}: Props): ReactElement {
             speed,
             startTransition,
             setIsSorting,
-            color
+            color,
+            soundIterate,
+            soundSwap,
+            soundElementFound
           );
           break;
         default:

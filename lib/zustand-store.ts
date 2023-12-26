@@ -1,21 +1,15 @@
 import { create } from "zustand";
 import { generateRandomArray } from "./utils";
 
-export type Algorithms =
-  | "merge"
-  | "bubble"
-  | "count"
-  | "quick"
-  | "insertion"
-  | "selection";
 type Options = {
   array: Bar[];
   sortingAlgorithm: Algorithms | null;
   length: number;
   speed: number;
   color: string;
-  leftToRightSound: string;
-  rightToLeftSound: string;
+  soundIterate: Sound;
+  soundSwap: Sound;
+  soundElementFound: Sound;
   isSorting: boolean;
 };
 
@@ -25,8 +19,9 @@ type Actions = {
   setLength: (length: number) => void;
   setSpeed: (speed: number) => void;
   setColor: (color: string) => void;
-  setLeftToRightSound: (sound: Options["leftToRightSound"]) => void;
-  setRightToLeftSound: (sound: Options["rightToLeftSound"]) => void;
+  setSoundIterate: (sound: Options["soundIterate"]) => void;
+  setSoundSwap: (sound: Options["soundSwap"]) => void;
+  setSoundElementFound: (sound: Options["soundElementFound"]) => void;
   setIsSorting: (bool: boolean) => void;
 };
 
@@ -41,10 +36,12 @@ export const useStore = create<Options & Actions>((set) => ({
   setSpeed: (speed) => set(() => ({ speed: speed })),
   color: "#FFFFFF" /* Provide default color value here */,
   setColor: (color) => set(() => ({ color: color })),
-  leftToRightSound: "1" /* Provide default leftToRightSound value here */,
-  setLeftToRightSound: (sound) => set(() => ({ leftToRightSound: sound })),
-  rightToLeftSound: "2" /* Provide default rightToLeftSound value here */,
-  setRightToLeftSound: (sound) => set(() => ({ rightToLeftSound: sound })),
+  soundIterate: "scale" /* Provide default leftToRightSound value here */,
+  soundElementFound: "ding",
+  soundSwap: "windchime",
+  setSoundIterate: (sound) => set(() => ({ soundIterate: sound })),
+  setSoundSwap: (sound) => set(() => ({ soundSwap: sound })),
+  setSoundElementFound: (sound) => set(() => ({ soundElementFound: sound })),
   isSorting: false,
   setIsSorting: (bool: boolean) => set(() => ({ isSorting: bool })),
 }));
