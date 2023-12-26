@@ -1,10 +1,16 @@
 import { create } from "zustand";
 import { generateRandomArray } from "./utils";
 
-export type Algorithms = "merge" | "bubble" | "count" | "quick" | "insertion";
+export type Algorithms =
+  | "merge"
+  | "bubble"
+  | "count"
+  | "quick"
+  | "insertion"
+  | "selection";
 type Options = {
   array: Bar[];
-  sortingAlgorithm: Algorithms;
+  sortingAlgorithm: Algorithms | null;
   length: number;
   speed: number;
   color: string;
@@ -27,7 +33,7 @@ type Actions = {
 export const useStore = create<Options & Actions>((set) => ({
   array: [],
   setArray: (array: Options["array"]) => set(() => ({ array: array })),
-  sortingAlgorithm: "insertion",
+  sortingAlgorithm: null,
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),
   length: 100,
   setLength: (length) => set(() => ({ length: length })),

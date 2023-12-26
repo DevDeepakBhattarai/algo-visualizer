@@ -1,4 +1,4 @@
-export async function QuickSort(
+export function CountSort(
   arr: Bar[],
   setArray: (arr: Bar[]) => void,
   speed: number,

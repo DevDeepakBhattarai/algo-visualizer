@@ -1,4 +1,4 @@
-export function InsertionSort(
+export async function InsertionSort(
   arr: Bar[],
   setArray: (arr: Bar[]) => void,
   speed: number,

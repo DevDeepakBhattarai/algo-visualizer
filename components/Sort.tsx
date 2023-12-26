@@ -3,6 +3,11 @@ import React, { ReactElement, useEffect, useTransition } from "react";
 import { useStore } from "@/lib/zustand-store";
 import useRandomArray from "@/hooks/useRandomArray";
 import { BubbleSort } from "@/lib/SortingAlgoriths/bubble-sort";
+import { InsertionSort } from "@/lib/SortingAlgoriths/insertion-sort";
+import { MergeSort } from "@/lib/SortingAlgoriths/merge-sort";
+import { QuickSort } from "@/lib/SortingAlgoriths/quick-sort";
+import { CountSort } from "@/lib/SortingAlgoriths/count-sort";
+import { SelectionSort } from "@/lib/SortingAlgoriths/selection-sort";
 interface Props {}
 
 export default function Sort({}: Props): ReactElement {
@@ -20,7 +25,70 @@ export default function Sort({}: Props): ReactElement {
 
   useEffect(() => {
     if (isSorting) {
-      BubbleSort(array, setArray, speed, startTransition, setIsSorting, color);
+      switch (sortingAlgorithm) {
+        case "bubble":
+          BubbleSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        case "count":
+          CountSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        case "insertion":
+          InsertionSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        case "merge":
+          MergeSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        case "quick":
+          QuickSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        case "selection":
+          SelectionSort(
+            array,
+            setArray,
+            speed,
+            startTransition,
+            setIsSorting,
+            color
+          );
+          break;
+        default:
+          break;
+      }
     }
   }, [isSorting, setArray]);
 
@@ -30,7 +98,6 @@ export default function Sort({}: Props): ReactElement {
         return (
           <div
             key={bar.id}
-            // layoutId={bar.id}
             style={{
               backgroundColor: bar.color,
               height: `${bar.value}rem`,

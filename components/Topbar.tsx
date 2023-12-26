@@ -11,7 +11,7 @@ import Sidebar, { UtilityButtons } from "./Sidebar";
 
 interface Props {}
 
-export default function Topbar({}: Props): ReactElement {
+export default function TopNavbar({}: Props): ReactElement {
   return (
     <div className="lg:hidden">
       <Sheet>

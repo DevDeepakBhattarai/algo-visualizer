@@ -11,6 +11,7 @@ import { Slider } from "./ui/slider";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Algorithms, useStore } from "@/lib/zustand-store";
+import { useToast } from "./ui/use-toast";
 export default function Component() {
   const {
     setColor,
@@ -40,19 +41,19 @@ export default function Component() {
                 Sorting Algorithm
               </Label>
               <Select
-                defaultValue={"bubble"}
                 onValueChange={(value: Algorithms) => {
                   setSortingAlgorithm(value);
                 }}
               >
                 <SelectTrigger id="algorithm">
-                  <SelectValue></SelectValue>
+                  <SelectValue placeholder="Select an algorithm"></SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="bubble">Bubble Sort</SelectItem>
                   <SelectItem value="quick">Quick Sort</SelectItem>
                   <SelectItem value="merge">Merge Sort</SelectItem>
                   <SelectItem value="count">Count Sort</SelectItem>
+                  <SelectItem value="selection">Selection Sort</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -170,7 +171,8 @@ export default function Component() {
 }
 
 export function UtilityButtons() {
-  const { isSorting, setIsSorting } = useStore();
+  const { isSorting, setIsSorting, sortingAlgorithm } = useStore();
+  const { toast } = useToast();
   return (
     <div className="flex justify-between">
       <Button
@@ -183,8 +185,16 @@ export function UtilityButtons() {
       >
         Stop
       </Button>
+
       <Button
         onClick={() => {
+          if (!sortingAlgorithm) {
+            toast({
+              title: "Please select an algorithm",
+              variant: "destructive",
+            });
+            return;
+          }
           setIsSorting(true);
         }}
         disabled={isSorting}
