@@ -23,9 +23,11 @@ export default function RootLayout({
         <Toaster></Toaster>
         <main className="flex overflow-hidden justify-between flex-col lg:flex-row h-screen">
           <Topbar></Topbar>
+
           <div className="lg:block hidden">
             <Sidebar></Sidebar>
           </div>
+
           {children}
         </main>
       </body>
