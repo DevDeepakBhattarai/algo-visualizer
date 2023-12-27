@@ -26,7 +26,7 @@ type Actions = {
 };
 
 export const useStore = create<Options & Actions>((set) => ({
-  array: [],
+  array: generateRandomArray(50, "white"),
   setArray: (array: Options["array"]) => set(() => ({ array: array })),
   sortingAlgorithm: null,
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),

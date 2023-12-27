@@ -6,14 +6,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function generateRandomArray(
-  length: number,
-  maxValue: number,
-  minValue: number,
-  color: string
-) {
+export function generateRandomArray(length: number, color: string) {
   const arr: Bar[] = Array.from({ length }, () => ({
-    value: Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue,
+    value: Math.random() * 99 + 1,
     id: crypto.randomUUID(),
     color: color,
   }));

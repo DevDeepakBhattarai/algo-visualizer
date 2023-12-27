@@ -27,6 +27,10 @@ export default function Sort({}: Props): ReactElement {
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
+    console.log(array);
+  }, [array]);
+
+  useEffect(() => {
     if (isSorting) {
       switch (sortingAlgorithm) {
         case "bubble":
@@ -59,7 +63,10 @@ export default function Sort({}: Props): ReactElement {
             speed,
             startTransition,
             setIsSorting,
-            color
+            color,
+            soundIterate,
+            soundSwap,
+            soundElementFound
           );
           break;
         case "merge":
@@ -102,16 +109,16 @@ export default function Sort({}: Props): ReactElement {
   }, [isSorting, setArray]);
 
   return (
-    <div className="flex w-full gap-1 items-end">
+    <div className="flex w-full gap-1 items-end h-full">
       {array.map((bar, index) => {
         return (
           <div
-            key={bar.id}
+            key={sortingAlgorithm === "insertion" ? index : bar.id}
             style={{
               backgroundColor: bar.color,
-              height: `${bar.value}rem`,
+              height: `${bar.value}%`,
             }}
-            className="flex-1 w-full rounded-sm"
+            className="flex-1 w-full rounded-sm "
           ></div>
         );
       })}

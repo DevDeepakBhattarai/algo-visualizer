@@ -52,6 +52,7 @@ export default function Component() {
                 <SelectContent position="popper">
                   <SelectItem value="bubble">Bubble Sort</SelectItem>
                   <SelectItem value="selection">Selection Sort</SelectItem>
+                  <SelectItem value="insertion">Insertion Sort</SelectItem>
                   <SelectItem value="quick" disabled>
                     Quick Sort
                   </SelectItem>
@@ -90,7 +91,7 @@ export default function Component() {
             <div className="flex flex-col">
               <div className="flex justify-between">
                 <Label className="mb-2 font-medium" htmlFor="speed">
-                  Speed (iteration/ms)
+                  Speed (stop/iteration)
                 </Label>
 
                 <Label className="mb-2 font-medium" htmlFor="speed">
@@ -188,7 +189,7 @@ export default function Component() {
               </Select>
             </div>
 
-            <div className="hidden w-full lg:flex justify-between p-4 ">
+            <div className="hidden w-full lg:flex justify-between">
               <UtilityButtons></UtilityButtons>
             </div>
           </div>
@@ -202,9 +203,8 @@ export function UtilityButtons() {
   const { isSorting, setIsSorting, sortingAlgorithm } = useStore();
   const { toast } = useToast();
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex w-full items-center justify-between py-4 lg:p-0">
       <Button
-        className="mt-4"
         disabled={true}
         onClick={() => {
           setIsSorting(false);
@@ -227,7 +227,6 @@ export function UtilityButtons() {
           setIsSorting(true);
         }}
         disabled={isSorting}
-        className="mt-4"
       >
         Start
       </Button>

@@ -16,7 +16,7 @@ export default function useRandomArray() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setArray(generateRandomArray(length, 5, 40, color));
+      setArray(generateRandomArray(length, color));
     }, 750);
     timer.current = timeout;
     return () => {
