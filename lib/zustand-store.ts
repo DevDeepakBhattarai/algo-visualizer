@@ -3,6 +3,7 @@ import { generateRandomArray } from "./utils";
 
 type Options = {
   array: Bar[];
+  extraArray: Bar[];
   sortingAlgorithm: Algorithms | null;
   length: number;
   speed: number;
@@ -23,10 +24,13 @@ type Actions = {
   setSoundSwap: (sound: Options["soundSwap"]) => void;
   setSoundElementFound: (sound: Options["soundElementFound"]) => void;
   setIsSorting: (bool: boolean) => void;
+  setExtraArray: (bar: Bar[]) => void;
 };
 
 export const useStore = create<Options & Actions>((set) => ({
   array: generateRandomArray(50, "white"),
+  extraArray: [],
+  setExtraArray: (bar) => set(() => ({ extraArray: bar })),
   setArray: (array: Options["array"]) => set(() => ({ array: array })),
   sortingAlgorithm: null,
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),

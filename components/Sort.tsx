@@ -22,6 +22,7 @@ export default function Sort({}: Props): ReactElement {
     array,
     speed,
     setIsSorting,
+    setExtraArray,
   } = useStore();
   useRandomArray();
   const [isPending, startTransition] = useTransition();
@@ -63,6 +64,7 @@ export default function Sort({}: Props): ReactElement {
             speed,
             startTransition,
             setIsSorting,
+            setExtraArray,
             color,
             soundIterate,
             soundSwap,
@@ -109,7 +111,7 @@ export default function Sort({}: Props): ReactElement {
   }, [isSorting, setArray]);
 
   return (
-    <div className="flex w-full gap-1 items-end h-full">
+    <div className="flex w-full gap-1 items-end h-full flex-1 place-self-end">
       {array.map((bar, index) => {
         return (
           <div

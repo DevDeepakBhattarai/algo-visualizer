@@ -6,6 +6,7 @@ export async function InsertionSort(
   speed: number,
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
+  setExtraArray: (arr: Bar[]) => void,
   color: string,
   soundIterate: Sound,
   soundSwap: Sound,
@@ -17,6 +18,7 @@ export async function InsertionSort(
   await sleep(1000);
   for (let i = 1; i < arr.length; i++) {
     let key = structuredClone(arr[i]);
+    setExtraArray([key]);
     for (var j = i - 1; j >= 0; j--) {
       await iterationSound.play();
       arr[i].color = "blue";
@@ -37,6 +39,6 @@ export async function InsertionSort(
       setArray([...arr]);
     });
   }
+  setExtraArray([]);
   setIsSorting(false);
 }
-// arr=[{value:3},{value:5},{value:4},{value:1},{value:2},{value:7}]
