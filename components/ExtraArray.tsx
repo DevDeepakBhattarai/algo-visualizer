@@ -31,7 +31,11 @@ export default function ExtraArray({}: Props): ReactElement {
   ) : sortingAlgorithm === "count" ? (
     <div className="flex flex-col w-full h-1/2 gap-1">
       <div className="space-x-2">
-        <Badge>Highest Value : {extraArray.length - 1}</Badge>
+        <Badge>
+          Highest Value :{" "}
+          {extraArray.length - 1 > 0 ? extraArray.length - 1 : 0}
+        </Badge>
+
         <Badge>Array Length : {extraArray.length}</Badge>
       </div>
       <div className="flex w-full gap-1 items-end h-full flex-1 place-self-end border px-2 border-white overflow-clip rounded-md">
