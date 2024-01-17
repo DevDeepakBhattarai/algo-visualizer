@@ -4,7 +4,7 @@ import ExtraArray from "@/components/ExtraArray";
 
 async function SortingApp() {
   return (
-    <div className="w-full h-full grid grid-rows-2 px-4 pt-2">
+    <div className="w-full h-full flex flex-col items-start justify-end px-4 pt-2">
       <ExtraArray />
       <Sort />
     </div>

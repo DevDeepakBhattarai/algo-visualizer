@@ -21,6 +21,7 @@ export async function SelectionSort(
     for (let j = i + 1; j < arr.length; j++) {
       arr[i].color = "blue";
       arr[j].color = "red";
+      
       if (j > 1) {
         arr[j - 1].color = color;
       }

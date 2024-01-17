@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement, useEffect, useTransition } from "react";
+import React, { ReactElement, useEffect, useRef, useTransition } from "react";
 import { useStore } from "@/lib/zustand-store";
 import useRandomArray from "@/hooks/useRandomArray";
 import { BubbleSort } from "@/lib/SortingAlgoriths/bubble-sort";
@@ -8,6 +8,7 @@ import { MergeSort } from "@/lib/SortingAlgoriths/merge-sort";
 import { QuickSort } from "@/lib/SortingAlgoriths/quick-sort";
 import { CountSort } from "@/lib/SortingAlgoriths/count-sort";
 import { SelectionSort } from "@/lib/SortingAlgoriths/selection-sort";
+import ExtraArray from "./ExtraArray";
 interface Props {}
 
 export default function Sort({}: Props): ReactElement {
@@ -21,16 +22,12 @@ export default function Sort({}: Props): ReactElement {
     color,
     array,
     speed,
+    extraArray,
     setIsSorting,
     setExtraArray,
   } = useStore();
   useRandomArray();
   const [isPending, startTransition] = useTransition();
-
-  useEffect(() => {
-    console.log(array);
-  }, [array]);
-
   useEffect(() => {
     if (isSorting) {
       switch (sortingAlgorithm) {
@@ -54,7 +51,12 @@ export default function Sort({}: Props): ReactElement {
             speed,
             startTransition,
             setIsSorting,
-            color
+            setExtraArray,
+            extraArray,
+            color,
+            soundIterate,
+            soundSwap,
+            soundElementFound
           );
           break;
         case "insertion":

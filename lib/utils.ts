@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function generateRandomArray(length: number, color: string) {
   const arr: Bar[] = Array.from({ length }, () => ({
-    value: Math.random() * 99 + 1,
+    value: Math.floor(Math.random() * 99) + 1,
     id: crypto.randomUUID(),
     color: color,
   }));

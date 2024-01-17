@@ -1,5 +1,5 @@
 type Bar = {
-  value: Number;
+  value: number;
   id: string;
   color: string;
 };
