@@ -3,7 +3,7 @@ import { generateRandomArray } from "./utils";
 
 type Options = {
   array: Bar[];
-  extraArray: Bar[];
+  extraArray: Bar[] | Bar[][];
   sortingAlgorithm: Algorithms | null;
   length: number;
   speed: number;

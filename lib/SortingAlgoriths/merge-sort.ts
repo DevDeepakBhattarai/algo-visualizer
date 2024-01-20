@@ -4,5 +4,9 @@ export function MergeSort(
   speed: number,
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
-  color: string
+  setExtraArray: (arr: Bar[]) => void,
+  color: string,
+  iterationSound: HTMLAudioElement,
+  foundSound: HTMLAudioElement,
+  swapSound: HTMLAudioElement
 ) {}

@@ -9,14 +9,10 @@ export async function CountSort(
   setExtraArray: (arr: Bar[]) => void,
   extraArray: Bar[],
   color: string,
-  soundIterate: Sound,
-  soundSwap: Sound,
-  soundElementFound: Sound
+  iterationSound: HTMLAudioElement,
+  foundSound: HTMLAudioElement,
+  swapSound: HTMLAudioElement
 ) {
-  const iterationSound = new Audio(soundIterate + ".mp3");
-  const swapSound = new Audio(soundSwap + ".mp3");
-  const foundSound = new Audio(soundElementFound + ".mp3");
-  await sleep(2000);
   const largestIndex = await findLargestIndex(
     arr,
     setArray,

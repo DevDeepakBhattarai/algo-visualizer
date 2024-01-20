@@ -8,14 +8,10 @@ export async function InsertionSort(
   setIsSorting: (bool: boolean) => void,
   setExtraArray: (arr: Bar[]) => void,
   color: string,
-  soundIterate: Sound,
-  soundSwap: Sound,
-  soundElementFound: Sound
+  iterationSound: HTMLAudioElement,
+  foundSound: HTMLAudioElement,
+  swapSound: HTMLAudioElement
 ) {
-  const iterationSound = new Audio(soundIterate + ".mp3");
-  const swapSound = new Audio(soundSwap + ".mp3");
-  const foundSound = new Audio(soundElementFound + ".mp3");
-  await sleep(1000);
   for (let i = 1; i < arr.length; i++) {
     let key = structuredClone(arr[i]);
     setExtraArray([key]);

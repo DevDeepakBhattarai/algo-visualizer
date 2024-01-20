@@ -7,16 +7,11 @@ export async function BubbleSort(
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
   color: string,
-  soundIterate: Sound,
-  soundSwap: Sound,
-  soundElementFound: Sound
+  iterationSound: HTMLAudioElement,
+  foundSound: HTMLAudioElement,
+  swapSound: HTMLAudioElement
 ) {
   let len = arr.length;
-  const iterationSound = new Audio(soundIterate + ".mp3");
-  const swapSound = new Audio(soundSwap + ".mp3");
-  const foundSound = new Audio(soundElementFound + ".mp3");
-  await sleep(1000);
-
   for (let i = 0; i < len - 1; i++) {
     arr[i].color = "blue";
 
