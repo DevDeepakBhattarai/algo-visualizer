@@ -8,15 +8,15 @@ export async function InsertionSort(
   setIsSorting: (bool: boolean) => void,
   setExtraArray: (arr: Bar[]) => void,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {
   for (let i = 1; i < arr.length; i++) {
     let key = structuredClone(arr[i]);
     setExtraArray([key]);
     for (var j = i - 1; j >= 0; j--) {
-      await iterationSound.play();
+      await iterationSound?.play();
       arr[i].color = "blue";
       arr[j].color = "red";
       arr[j + 1] = structuredClone(arr[j]);
@@ -28,7 +28,7 @@ export async function InsertionSort(
         break;
       }
     }
-    await swapSound.play();
+    await swapSound?.play();
     startTransition(async () => {
       arr[j + 1] = structuredClone(key);
       arr[i].color = color;

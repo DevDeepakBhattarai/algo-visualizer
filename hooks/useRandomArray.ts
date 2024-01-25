@@ -1,12 +1,6 @@
 import { generateRandomArray } from "@/lib/utils";
 import { useStore } from "@/lib/zustand-store";
-import React, {
-  MutableRefObject,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 
 interface Props {}
 

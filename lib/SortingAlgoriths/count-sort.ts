@@ -9,9 +9,9 @@ export async function CountSort(
   setExtraArray: (arr: Bar[]) => void,
   extraArray: Bar[],
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {
   const largestIndex = await findLargestIndex(
     arr,
@@ -64,10 +64,10 @@ export async function CountSort(
     await sleep(speed);
 
     if (countArr[j].value === 0) {
-      await iterationSound.play();
+      await iterationSound?.play();
       j++;
     } else if (countArr[j].value > 0) {
-      await swapSound.play();
+      await swapSound?.play();
       countArr[j].color = "green";
       arr[i].value = j;
       arr[i].color = "green";
@@ -114,8 +114,8 @@ async function copyToMadeArray(
   startTransition: React.TransitionStartFunction,
   speed: number,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null
 ) {
   for (let i = 0; i < arr.length; i++) {
     arr[i].color = "red";
@@ -124,7 +124,7 @@ async function copyToMadeArray(
       arr[i - 1].color = color;
     }
 
-    await iterationSound.play();
+    await iterationSound?.play();
     countArr[arr[i].value].color = "green";
     startTransition(() => {
       setExtraArray([...countArr]);
@@ -136,7 +136,7 @@ async function copyToMadeArray(
       color: "green",
       id: "id",
     });
-    await foundSound.play();
+    await foundSound?.play();
     await sleep(speed);
     startTransition(() => {
       setExtraArray([...countArr]);
@@ -151,13 +151,13 @@ async function findLargestIndex(
   setArray: (arr: Bar[]) => void,
   speed: number,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null
 ) {
   let largest = 0;
   for (let i = 0; i < arr.length; i++) {
     arr[i].color = "red";
-    await iterationSound.play();
+    await iterationSound?.play();
     if (i > 1) {
       arr[i - 1].color = color;
     }
@@ -165,7 +165,7 @@ async function findLargestIndex(
     setArray([...arr]);
     await sleep(speed);
     if (arr[i].value > arr[largest].value) {
-      await foundSound.play();
+      await foundSound?.play();
       arr[largest].color = color;
       largest = i;
     }

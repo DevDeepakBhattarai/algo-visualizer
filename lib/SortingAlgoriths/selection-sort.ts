@@ -7,9 +7,9 @@ export async function SelectionSort(
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {
   await sleep(1000);
   for (let i = 0; i < arr.length; i++) {
@@ -27,10 +27,10 @@ export async function SelectionSort(
         arr[smallest].color = color;
         smallest = j;
         await sleep(300);
-        await foundSound.play();
+        await foundSound?.play();
       }
       arr[smallest].color = "green";
-      await iterationSound.play();
+      await iterationSound?.play();
       await sleep(speed);
       if (arr[smallest].value <= arr[j].value) {
         arr[j].color = color;
@@ -43,7 +43,7 @@ export async function SelectionSort(
       let temp = arr[i];
       arr[i] = arr[smallest];
       arr[smallest] = temp;
-      swapSound.play();
+      swapSound?.play();
       setArray([...arr]);
     });
   }

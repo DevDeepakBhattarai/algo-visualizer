@@ -11,9 +11,9 @@ export async function QuickSort(
   setTreeData: React.Dispatch<React.SetStateAction<RawNodeDatum[]>>,
   data: RawNodeDatum[],
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {
   const id = data[0].attributes!.id as string;
   const low = 0,
@@ -115,7 +115,7 @@ export async function QuickSort(
       // This i <=high is so that we don't go out of array index .
       //if we don't want to use this i<=high we have make n+1 length array and put infinity as the last element there
       while (i <= high && A[i].value <= pivot.value) {
-        await iterationSound.play();
+        await iterationSound?.play();
         i++;
         if (i < high) A[i].color = "red";
         if (i > low) {
@@ -136,7 +136,7 @@ export async function QuickSort(
       // });
 
       while (A[j].value > pivot.value) {
-        await iterationSound.play();
+        await iterationSound?.play();
 
         j--;
         if (j > low) A[j].color = "blue";
@@ -162,7 +162,7 @@ export async function QuickSort(
       // });
 
       if (i < j) {
-        await swapSound.play();
+        await swapSound?.play();
         A[i].color = "blue";
         A[j].color = "red";
         temp = structuredClone(A[i]);
@@ -176,7 +176,7 @@ export async function QuickSort(
     } while (j >= i);
     await sleep(speed * 3);
     pivot.color = color;
-    await swapSound.play();
+    await swapSound?.play();
     if (i < high) A[i].color = color;
     if (j >= low) A[j].color = color;
     temp = structuredClone(A[j]);

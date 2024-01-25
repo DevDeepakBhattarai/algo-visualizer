@@ -7,9 +7,9 @@ export async function BubbleSort(
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {
   let len = arr.length;
   for (let i = 0; i < len - 1; i++) {
@@ -19,7 +19,7 @@ export async function BubbleSort(
       arr[i - 1].color = color;
     }
     for (let j = i + 1; j < len; j++) {
-      await iterationSound.play();
+      await iterationSound?.play();
       arr[j].color = "red";
       setArray([...arr]);
       if (arr[i].value > arr[j].value) {
@@ -32,7 +32,7 @@ export async function BubbleSort(
           arr[j] = temp;
           setArray([...arr]);
           arr[j].color = "red";
-          await swapSound.play();
+          await swapSound?.play();
         });
       }
       await sleep(speed);

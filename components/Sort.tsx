@@ -33,19 +33,10 @@ export default function Sort({}: Props): ReactElement {
   } = useStore();
   useRandomArray();
   const [isPending, startTransition] = useTransition();
-  const iterationSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundIterate + ".mp3"),
-    [soundIterate]
-  );
-  const foundSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundElementFound + ".mp3"),
-    [soundElementFound]
-  );
+  const iterationSound = useRef<HTMLAudioElement>(null);
+  const foundSound = useRef<HTMLAudioElement>(null);
+  const swapSound = useRef<HTMLAudioElement>(null);
 
-  const swapSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundSwap + ".mp3"),
-    [soundSwap]
-  );
   useEffect(() => {
     if (isSorting) {
       switch (sortingAlgorithm) {
@@ -57,9 +48,9 @@ export default function Sort({}: Props): ReactElement {
             startTransition,
             setIsSorting,
             color,
-            iterationSound,
-            swapSound,
-            foundSound
+            iterationSound.current,
+            swapSound.current,
+            foundSound.current
           );
           break;
         case "count":
@@ -72,9 +63,9 @@ export default function Sort({}: Props): ReactElement {
             setExtraArray,
             extraArray,
             color,
-            iterationSound,
-            swapSound,
-            foundSound
+            iterationSound.current,
+            swapSound.current,
+            foundSound.current
           );
           break;
         case "insertion":
@@ -86,9 +77,9 @@ export default function Sort({}: Props): ReactElement {
             setIsSorting,
             setExtraArray,
             color,
-            iterationSound,
-            swapSound,
-            foundSound
+            iterationSound.current,
+            swapSound.current,
+            foundSound.current
           );
           break;
         case "merge":
@@ -100,9 +91,9 @@ export default function Sort({}: Props): ReactElement {
             setIsSorting,
             setExtraArray,
             color,
-            iterationSound,
-            swapSound,
-            foundSound
+            iterationSound.current,
+            swapSound.current,
+            foundSound.current
           );
           break;
         case "selection":
@@ -113,9 +104,9 @@ export default function Sort({}: Props): ReactElement {
             startTransition,
             setIsSorting,
             color,
-            iterationSound,
-            swapSound,
-            foundSound
+            iterationSound.current,
+            swapSound.current,
+            foundSound.current
           );
           break;
         default:
@@ -126,6 +117,9 @@ export default function Sort({}: Props): ReactElement {
 
   return (
     <div className="flex w-full gap-1 items-end h-full flex-1 place-self-end">
+      <audio src={soundIterate + ".mp3"} className="invisible"></audio>
+      <audio src={soundElementFound + ".mp3"} className="invisible"></audio>
+      <audio src={soundSwap + ".mp3"} className="invisible"></audio>
       {array.map((bar, index) => {
         return (
           <div

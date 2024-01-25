@@ -31,19 +31,10 @@ export default function QuickSorter({}: Props): ReactElement {
     setExtraArray,
   } = useStore();
   const [isPending, startTransition] = useTransition();
-  const iterationSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundIterate + ".mp3"),
-    [soundIterate]
-  );
-  const foundSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundElementFound + ".mp3"),
-    [soundElementFound]
-  );
+  const iterationSound = useRef<HTMLAudioElement>(null);
+  const foundSound = useRef<HTMLAudioElement>(null);
+  const swapSound = useRef<HTMLAudioElement>(null);
 
-  const swapSound: HTMLAudioElement = useMemo(
-    () => new Audio(soundSwap + ".mp3"),
-    [soundSwap]
-  );
   const [data, setData] = useState<RawNodeDatum[]>([
     {
       name: "root",
@@ -87,6 +78,9 @@ export default function QuickSorter({}: Props): ReactElement {
 
   return (
     <div className="w-full h-full flex flex-col items-start justify-end px-4 pt-2">
+      <audio src={soundIterate + ".mp3"} className="invisible"></audio>
+      <audio src={soundElementFound + ".mp3"} className="invisible"></audio>
+      <audio src={soundSwap + ".mp3"} className="invisible"></audio>
       <QuickSortTree data={data} />
       <Sort></Sort>
     </div>
