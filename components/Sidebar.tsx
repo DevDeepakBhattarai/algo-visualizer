@@ -42,7 +42,6 @@ export default function Component() {
                 Sorting Algorithm
               </Label>
               <Select
-                defaultValue="quick"
                 onValueChange={(value: Algorithms) => {
                   setSortingAlgorithm(value);
                 }}

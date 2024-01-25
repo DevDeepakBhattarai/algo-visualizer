@@ -12,6 +12,8 @@ export async function InsertionSort(
   foundSound: HTMLAudioElement | null,
   swapSound: HTMLAudioElement | null
 ) {
+  await iterationSound?.play();
+
   for (let i = 1; i < arr.length; i++) {
     let key = structuredClone(arr[i]);
     setExtraArray([key]);

@@ -117,9 +117,21 @@ export default function Sort({}: Props): ReactElement {
 
   return (
     <div className="flex w-full gap-1 items-end h-full flex-1 place-self-end">
-      <audio src={soundIterate + ".mp3"} className="invisible"></audio>
-      <audio src={soundElementFound + ".mp3"} className="invisible"></audio>
-      <audio src={soundSwap + ".mp3"} className="invisible"></audio>
+      <audio
+        src={soundIterate + ".mp3"}
+        className="invisible"
+        ref={iterationSound}
+      ></audio>
+      <audio
+        src={soundElementFound + ".mp3"}
+        className="invisible"
+        ref={foundSound}
+      ></audio>
+      <audio
+        src={soundSwap + ".mp3"}
+        className="invisible"
+        ref={swapSound}
+      ></audio>
       {array.map((bar, index) => {
         return (
           <div

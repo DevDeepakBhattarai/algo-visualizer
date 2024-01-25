@@ -13,6 +13,8 @@ export async function CountSort(
   foundSound: HTMLAudioElement | null,
   swapSound: HTMLAudioElement | null
 ) {
+  await iterationSound?.play();
+
   const largestIndex = await findLargestIndex(
     arr,
     setArray,

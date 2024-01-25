@@ -15,11 +15,13 @@ export async function QuickSort(
   foundSound: HTMLAudioElement | null,
   swapSound: HTMLAudioElement | null
 ) {
+  await iterationSound?.play();
+
   const id = data[0].attributes!.id as string;
+
   const low = 0,
     high = arr.length - 1;
   await sorter(id, low, high);
-
   setIsSorting(false);
 
   // Helper functions

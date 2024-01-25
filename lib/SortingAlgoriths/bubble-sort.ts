@@ -11,6 +11,7 @@ export async function BubbleSort(
   foundSound: HTMLAudioElement | null,
   swapSound: HTMLAudioElement | null
 ) {
+  await iterationSound?.play();
   let len = arr.length;
   for (let i = 0; i < len - 1; i++) {
     arr[i].color = "blue";
@@ -32,8 +33,8 @@ export async function BubbleSort(
           arr[j] = temp;
           setArray([...arr]);
           arr[j].color = "red";
-          await swapSound?.play();
         });
+        await swapSound?.play();
       }
       await sleep(speed);
 

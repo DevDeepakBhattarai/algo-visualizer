@@ -11,6 +11,8 @@ export async function SelectionSort(
   foundSound: HTMLAudioElement | null,
   swapSound: HTMLAudioElement | null
 ) {
+  await iterationSound?.play();
+
   await sleep(1000);
   for (let i = 0; i < arr.length; i++) {
     let smallest = i;

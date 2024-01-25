@@ -70,17 +70,29 @@ export default function QuickSorter({}: Props): ReactElement {
         setData,
         data,
         color,
-        iterationSound,
-        foundSound,
-        swapSound
+        iterationSound.current,
+        foundSound.current,
+        swapSound.current
       );
   }, [isSorting]);
 
   return (
     <div className="w-full h-full flex flex-col items-start justify-end px-4 pt-2">
-      <audio src={soundIterate + ".mp3"} className="invisible"></audio>
-      <audio src={soundElementFound + ".mp3"} className="invisible"></audio>
-      <audio src={soundSwap + ".mp3"} className="invisible"></audio>
+      <audio
+        src={soundIterate + ".mp3"}
+        className="invisible"
+        ref={iterationSound}
+      ></audio>
+      <audio
+        src={soundElementFound + ".mp3"}
+        className="invisible"
+        ref={foundSound}
+      ></audio>
+      <audio
+        src={soundSwap + ".mp3"}
+        className="invisible"
+        ref={swapSound}
+      ></audio>
       <QuickSortTree data={data} />
       <Sort></Sort>
     </div>

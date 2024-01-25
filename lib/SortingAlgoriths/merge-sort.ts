@@ -6,7 +6,7 @@ export function MergeSort(
   setIsSorting: (bool: boolean) => void,
   setExtraArray: (arr: Bar[]) => void,
   color: string,
-  iterationSound: HTMLAudioElement,
-  foundSound: HTMLAudioElement,
-  swapSound: HTMLAudioElement
+  iterationSound: HTMLAudioElement | null,
+  foundSound: HTMLAudioElement | null,
+  swapSound: HTMLAudioElement | null
 ) {}
