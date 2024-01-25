@@ -5,7 +5,7 @@ export const useCenteredTree = () => {
   const containerRef = useCallback((containerElem: HTMLDivElement) => {
     if (containerElem !== null) {
       const { width, height } = containerElem.getBoundingClientRect();
-      setTranslate({ x: width / 2, y: height / 2 });
+      setTranslate({ x: width / 2, y: 20 });
     }
   }, []);
   return [translate, containerRef];

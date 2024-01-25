@@ -47,10 +47,27 @@ export default function QuickSorter({}: Props): ReactElement {
   const [data, setData] = useState<RawNodeDatum[]>([
     {
       name: "root",
-      attributes: { array: JSON.stringify(array.map((bar) => bar.value)) },
+      attributes: {
+        array: JSON.stringify(array.map((bar) => bar.value)),
+        id: crypto.randomUUID(),
+      },
       children: [],
     },
   ]);
+
+  useEffect(() => {
+    setData([
+      {
+        name: "root",
+        attributes: {
+          array: JSON.stringify(array.map((bar) => bar.value)),
+          id: crypto.randomUUID(),
+        },
+        children: [],
+      },
+    ]);
+  }, [array.length]);
+
   useEffect(() => {
     if (isSorting && sortingAlgorithm === "quick")
       QuickSort(
@@ -60,6 +77,7 @@ export default function QuickSorter({}: Props): ReactElement {
         startTransition,
         setIsSorting,
         setData,
+        data,
         color,
         iterationSound,
         foundSound,
@@ -77,6 +95,7 @@ export default function QuickSorter({}: Props): ReactElement {
 
 function QuickSortTree({ data }: { data: RawNodeDatum[] }) {
   const [translate, containerRef] = useCenteredTree();
+  const { array } = useStore();
   return (
     <div
       ref={containerRef as unknown as any}
@@ -93,7 +112,11 @@ function QuickSortTree({ data }: { data: RawNodeDatum[] }) {
           rootNodeClassName="[&_circle]:fill-white [&_text]:fill-white relative"
           leafNodeClassName="[&_circle]:fill-white [&_text]:fill-white relative"
           pathClassFunc={() => "!stroke-white"}
-          transitionDuration={100}
+          transitionDuration={200}
+          nodeSize={{ y: 200, x: ((array.length + 10) / 100) * 1700 }}
+          zoom={0.5}
+          separation={{ siblings: 1, nonSiblings: 1 }}
+          shouldCollapseNeighborNodes
           enableLegacyTransitions
           renderCustomNodeElement={(rd3tProps) =>
             renderForeignObjectNode({
@@ -118,19 +141,22 @@ function renderForeignObjectNode({
   return (
     <>
       {/* <circle r="15" onClick={toggleNode}></circle> */}
-      <foreignObject {...foreignObjectProps} className="overflow-visible">
+      <foreignObject
+        {...foreignObjectProps}
+        className="overflow-visible flex flex-wrap"
+      >
         <div
-          className=" bg-white h-max w-max rounded-sm border-black border -translate-x-1/2"
+          className="bg-white h-max w-max rounded-sm border border-black   -translate-x-1/2"
           onClick={toggleNode}
         >
           {/* <h3 className="text-center text-black m-4">{nodeDatum.name}</h3> */}
-          <div className="text-center text-black m-4">
+          <div className="text-center flex flex-wrap border border-black text-black m-4">
             {(JSON.parse(nodeDatum.attributes.array) as number[]).map(
               (number, index) => {
                 return (
                   <span
                     key={index}
-                    className="border-black border rounded-sm p-2.5"
+                    className="flex-1 border-black border rounded-sm p-2.5"
                   >
                     {number}
                   </span>
