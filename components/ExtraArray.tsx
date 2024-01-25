@@ -2,8 +2,8 @@
 import { useStore } from "@/lib/zustand-store";
 import React, { ReactElement } from "react";
 import { Badge } from "./ui/badge";
-
 interface Props {}
+
 
 export default function ExtraArray({}: Props): ReactElement {
   const { extraArray, setExtraArray, sortingAlgorithm } = useStore();
@@ -63,3 +63,5 @@ export default function ExtraArray({}: Props): ReactElement {
     return <></>;
   }
 }
+
+

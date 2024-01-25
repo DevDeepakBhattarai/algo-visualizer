@@ -105,20 +105,6 @@ export default function Sort({}: Props): ReactElement {
             foundSound
           );
           break;
-        case "quick":
-          QuickSort(
-            array,
-            setArray,
-            speed,
-            startTransition,
-            setIsSorting,
-            setExtraArray,
-            color,
-            iterationSound,
-            swapSound,
-            foundSound
-          );
-          break;
         case "selection":
           SelectionSort(
             array,

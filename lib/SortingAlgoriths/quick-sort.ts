@@ -1,5 +1,6 @@
 import { startTransition } from "react";
 import { sleep } from "../utils";
+import { RawNodeDatum } from "react-d3-tree";
 
 export async function QuickSort(
   arr: Bar[],
@@ -7,7 +8,7 @@ export async function QuickSort(
   speed: number,
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
-  setExtraArray: (arr: Bar[]) => void,
+  setTreeData: React.Dispatch<React.SetStateAction<RawNodeDatum[]>>,
   color: string,
   iterationSound: HTMLAudioElement,
   foundSound: HTMLAudioElement,
@@ -21,7 +22,7 @@ export async function QuickSort(
     speed,
     startTransition,
     setIsSorting,
-    setExtraArray,
+    setTreeData,
     low,
     high,
     color,
@@ -38,7 +39,7 @@ async function sorter(
   speed: number,
   startTransition: React.TransitionStartFunction,
   setIsSorting: (bool: boolean) => void,
-  setExtraArray: (arr: Bar[]) => void,
+  setTreeData: React.Dispatch<React.SetStateAction<RawNodeDatum[]>>,
   low: number,
   high: number,
   color: string,
@@ -52,19 +53,21 @@ async function sorter(
       low,
       high,
       setArray,
+      setTreeData,
       speed,
       color,
       iterationSound,
       foundSound,
       swapSound
     );
+
     await sorter(
       arr,
       setArray,
       speed,
       startTransition,
       setIsSorting,
-      setExtraArray,
+      setTreeData,
       low,
       position - 1,
       color,
@@ -78,7 +81,7 @@ async function sorter(
       speed,
       startTransition,
       setIsSorting,
-      setExtraArray,
+      setTreeData,
       position + 1,
       high,
       color,
@@ -93,6 +96,7 @@ async function partition(
   low: number,
   high: number,
   setArray: (arr: Bar[]) => void,
+  setTreeData: React.Dispatch<React.SetStateAction<RawNodeDatum[]>>,
   speed: number,
   color: string,
   iterationSound: HTMLAudioElement,

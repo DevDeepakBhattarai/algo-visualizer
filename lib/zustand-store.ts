@@ -3,7 +3,7 @@ import { generateRandomArray } from "./utils";
 
 type Options = {
   array: Bar[];
-  extraArray: Bar[] | Bar[][];
+  extraArray: Bar[];
   sortingAlgorithm: Algorithms | null;
   length: number;
   speed: number;
@@ -32,7 +32,7 @@ export const useStore = create<Options & Actions>((set) => ({
   extraArray: [],
   setExtraArray: (bar) => set(() => ({ extraArray: bar })),
   setArray: (array: Options["array"]) => set(() => ({ array: array })),
-  sortingAlgorithm: null,
+  sortingAlgorithm: "quick",
   setSortingAlgorithm: (algo) => set(() => ({ sortingAlgorithm: algo })),
   length: 50,
   setLength: (length) => set(() => ({ length: length })),
