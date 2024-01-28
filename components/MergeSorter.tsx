@@ -49,7 +49,6 @@ export default function MergeSorter({}: Props): ReactElement {
     {
       name: "root",
       attributes: {
-        newArray: "[1,2,3,4,5]",
         array: JSON.stringify(array.map((bar) => bar.value)),
         id: crypto.randomUUID(),
       },
@@ -62,7 +61,6 @@ export default function MergeSorter({}: Props): ReactElement {
       {
         name: "root",
         attributes: {
-          newArray: "[1,2,3,4,5,6]",
           array: JSON.stringify(array.map((bar) => bar.value)),
           id: crypto.randomUUID(),
         },
@@ -118,7 +116,7 @@ function TheUpperArray({ treeData }: { treeData: RawNodeDatum[] }) {
   return (
     <div className="relative flex w-full gap-1 items-end h-full flex-1 place-self-end border px-2 border-white overflow-clip rounded-md">
       <Drawer dismissible={false}>
-        <DrawerTrigger className="absolute top-2 right-2">
+        <DrawerTrigger className="absolute top-2 left-2">
           {" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +186,6 @@ function MergeSortTree({ data }: { data: RawNodeDatum[] }) {
           nodeSize={{ y: 200, x: ((array.length + 10) / 100) * 1700 }}
           zoom={0.5}
           separation={{ siblings: 1, nonSiblings: 1 }}
-          shouldCollapseNeighborNodes
           enableLegacyTransitions
           renderCustomNodeElement={(rd3tProps) =>
             renderForeignObjectNode({

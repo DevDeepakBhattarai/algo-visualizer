@@ -122,7 +122,6 @@ function QuickSortTree({ data }: { data: RawNodeDatum[] }) {
           nodeSize={{ y: 200, x: ((array.length + 10) / 100) * 1700 }}
           zoom={0.5}
           separation={{ siblings: 1, nonSiblings: 1 }}
-          shouldCollapseNeighborNodes
           enableLegacyTransitions
           renderCustomNodeElement={(rd3tProps) =>
             renderForeignObjectNode({

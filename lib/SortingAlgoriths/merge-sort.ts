@@ -18,7 +18,8 @@ export async function MergeSort(
 ) {
   await iterationSound?.play();
   setIsSorting(true);
-  await sorter(arr, 0, arr.length - 1);
+  const parentId = data[0].attributes!.id as string;
+  await sorter(arr, 0, arr.length - 1, parentId);
   setIsSorting(false);
   async function merge(A: Bar[], low: number, high: number, mid: number) {
     let i,
@@ -34,6 +35,8 @@ export async function MergeSort(
       setArray([...A]);
       await sleep(speed);
       if (A[i].value < A[j].value) {
+        if (A[i - 1]) A[i - 1].color = color;
+
         A[i].color = "green";
         extraArray[k] = structuredClone(A[i]);
         await swapSound?.play();
@@ -44,6 +47,8 @@ export async function MergeSort(
         setArray([...A]);
         await sleep(speed);
       } else {
+        if (A[j - 1]) A[j - 1].color = color;
+
         A[j].color = "green";
         extraArray[k] = structuredClone(A[j]);
         await swapSound?.play();
@@ -64,6 +69,7 @@ export async function MergeSort(
 
     while (i <= mid) {
       await swapSound?.play();
+      if (A[i - 1]) A[i - 1].color = color;
 
       A[i].color = "green";
       extraArray[k] = structuredClone(A[i]);
@@ -76,6 +82,7 @@ export async function MergeSort(
 
     while (j <= high) {
       await swapSound?.play();
+      if (A[j - 1]) A[j - 1].color = color;
 
       A[j].color = "green";
       extraArray[k] = structuredClone(A[j]);
@@ -105,12 +112,98 @@ export async function MergeSort(
     await sleep(500);
   }
 
-  async function sorter(A: Bar[], low: number, high: number) {
+  async function sorter(A: Bar[], low: number, high: number, parentId: string) {
     if (low < high) {
       let mid = Math.floor(low + (high - low) / 2);
-      await sorter(A, low, mid);
-      await sorter(A, mid + 1, high);
+      const child1 = arr.slice(low, mid + 1);
+      const child2 = arr.slice(mid + 1, high + 1);
+      const child1Id = crypto.randomUUID();
+      const child2Id = crypto.randomUUID();
+
+      const childArray = [
+        { bar: child1, id: child1Id },
+        { bar: child2, id: child2Id },
+      ];
+
+      updateChildrenTTD(data[0], parentId, childArray);
+      await sorter(A, low, mid, child1Id);
+      updateChildrenDTT(data[0], parentId, A.slice(low, mid + 1));
+      await sorter(A, mid + 1, high, child2Id);
+      updateChildrenDTT(data[0], parentId, A.slice(mid + 1, high + 1));
       await merge(A, low, high, mid);
+    }
+  }
+
+  function updateChildrenTTD( // updateChildrenTopToDown , when we move from top of the tree to bottom initially while dividing the array into two part every time, we update the array attribute in this process
+    node: RawNodeDatum,
+    parentId: string,
+    child: { bar: Bar[]; id: string }[]
+  ) {
+    if (
+      node.attributes &&
+      node.attributes.id === parentId &&
+      node.children &&
+      node.children.length < 2
+    ) {
+      child.forEach((individualChild) => {
+        individualChild.bar.length > 0 &&
+          node.children?.push({
+            name: "root",
+            attributes: {
+              array: JSON.stringify(
+                individualChild.bar.map((bar) => bar.value)
+              ),
+              id: individualChild.id,
+            },
+            children: [],
+          });
+      });
+
+      setTreeData([...data]);
+    } else {
+      if (node.children && node.children.length > 0) {
+        if (
+          node.children[0] &&
+          (JSON.parse(node.children[0].attributes!.array as string) as number[])
+            .length > 1
+        )
+          updateChildrenTTD(node.children[0], parentId, child);
+
+        if (
+          node.children[1] &&
+          (JSON.parse(node.children[1].attributes!.array as string) as number[])
+            .length > 1
+        )
+          updateChildrenTTD(node.children[1], parentId, child);
+      }
+    }
+  }
+
+  function updateChildrenDTT(
+    node: RawNodeDatum,
+    parentId: string,
+    newArray: Bar[]
+  ) {
+    if (node.attributes && node.attributes.id === parentId) {
+      node.attributes.newArray = JSON.stringify(
+        newArray.map((bar) => bar.value)
+      );
+      setTreeData([...data]);
+    } else {
+      if (node.children && node.children.length > 0) {
+        if (
+          node.children[0] &&
+          (JSON.parse(node.children[0].attributes!.array as string) as number[])
+            .length > 1
+        )
+          updateChildrenDTT(node.children[0], parentId, newArray);
+        if (
+          node.children[1] &&
+          (JSON.parse(node.children[1].attributes!.array as string) as number[])
+            .length > 1
+        )
+          updateChildrenDTT(node.children[1], parentId, newArray);
+      }
     }
   }
 }
