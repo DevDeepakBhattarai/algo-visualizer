@@ -127,10 +127,9 @@ export async function MergeSort(
 
       updateChildrenTTD(data[0], parentId, childArray);
       await sorter(A, low, mid, child1Id);
-      updateChildrenDTT(data[0], parentId, A.slice(low, mid + 1));
       await sorter(A, mid + 1, high, child2Id);
-      updateChildrenDTT(data[0], parentId, A.slice(mid + 1, high + 1));
       await merge(A, low, high, mid);
+      updateChildrenDTT(data[0], parentId, A.slice(low, high + 1));
     }
   }
 
