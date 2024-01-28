@@ -104,7 +104,6 @@ export async function QuickSort(
   ) {
     let i = low + 1,
       j = high;
-    console.log("Quick Sort");
     let pivot = A[low];
     pivot.color = "purple";
     let temp: Bar = {

@@ -207,7 +207,6 @@ function renderForeignObjectNode({
   toggleNode: any;
   foreignObjectProps: any;
 }) {
-  console.log(nodeDatum);
   return (
     <>
       {/* <circle r="15" onClick={toggleNode}></circle> */}
