@@ -55,9 +55,7 @@ export default function Component() {
                   <SelectItem value="count">Count Sort</SelectItem>
                   <SelectItem value="insertion">Insertion Sort</SelectItem>
                   <SelectItem value="quick">Quick Sort</SelectItem>
-                  <SelectItem value="merge" disabled>
-                    Merge Sort
-                  </SelectItem>
+                  <SelectItem value="merge">Merge Sort</SelectItem>
                 </SelectContent>
               </Select>
             </div>

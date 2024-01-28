@@ -82,20 +82,6 @@ export default function Sort({}: Props): ReactElement {
             foundSound.current
           );
           break;
-        case "merge":
-          MergeSort(
-            array,
-            setArray,
-            speed,
-            startTransition,
-            setIsSorting,
-            setExtraArray,
-            color,
-            iterationSound.current,
-            swapSound.current,
-            foundSound.current
-          );
-          break;
         case "selection":
           SelectionSort(
             array,
@@ -135,7 +121,11 @@ export default function Sort({}: Props): ReactElement {
       {array.map((bar, index) => {
         return (
           <div
-            key={sortingAlgorithm === "insertion" ? index : bar.id}
+            key={
+              sortingAlgorithm === "insertion" || sortingAlgorithm === "merge"
+                ? index
+                : bar.id
+            }
             style={{
               backgroundColor: bar.color,
               height: `${bar.value}%`,
