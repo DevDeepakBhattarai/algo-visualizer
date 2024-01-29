@@ -132,12 +132,14 @@ export default function Component() {
                 <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
                   Sound - Iterate
                 </Label>
-                <Play
+                <span
                   className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
                   onClick={() => {
                     new Audio(soundIterate + ".mp3").play();
                   }}
-                />
+                >
+                  <Play className="h-full w-full" />
+                </span>
               </div>
               <Select
                 defaultValue="scale"
@@ -161,12 +163,14 @@ export default function Component() {
                 <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
                   Sound - Swap
                 </Label>
-                <Play
+                <span
                   className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
                   onClick={() => {
                     new Audio(soundSwap + ".mp3").play();
                   }}
-                />
+                >
+                  <Play className="h-full w-full" />
+                </span>
               </div>
               <Select
                 defaultValue="ding"
@@ -190,12 +194,14 @@ export default function Component() {
                 <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
                   Sound - Element found
                 </Label>
-                <Play
+                <span
                   className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
                   onClick={() => {
                     new Audio(soundElementFound + ".mp3").play();
                   }}
-                />
+                >
+                  <Play className="h-full w-full" />
+                </span>
               </div>
 
               <Select
