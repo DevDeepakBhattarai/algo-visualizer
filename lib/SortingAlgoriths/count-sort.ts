@@ -171,7 +171,7 @@ async function findLargestIndex(
       arr[largest].color = color;
       largest = i;
     }
-    arr[largest].color = "green";
+    arr[largest].color = "blue";
     arr[i].color = color;
   }
   return largest;

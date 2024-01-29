@@ -125,6 +125,11 @@ export async function MergeSort(
         { bar: child2, id: child2Id },
       ];
 
+      A[mid].color = "purple";
+      A[high].color = color;
+      setArray([...A]);
+      await sleep(3 * speed);
+
       updateChildrenTTD(data[0], parentId, childArray);
       await sorter(A, low, mid, child1Id);
       await sorter(A, mid + 1, high, child2Id);
