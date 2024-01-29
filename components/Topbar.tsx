@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactElement } from "react";
 import {
   Sheet,
@@ -7,11 +8,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
-import Sidebar, { UtilityButtons } from "./Sidebar";
+import Sidebar from "./Sidebar";
 import { Settings } from "lucide-react";
+import { Hints } from "./Hints";
+import { useStore } from "@/lib/zustand-store";
+import { useToast } from "./ui/use-toast";
 interface Props {}
 
 export default function TopNavbar({}: Props): ReactElement {
+  const { sortingAlgorithm, isSorting, setIsSorting } = useStore();
+  const { toast } = useToast();
   return (
     <div className="flex lg:hidden p-4 items-center justify-between">
       <div>
@@ -31,9 +37,27 @@ export default function TopNavbar({}: Props): ReactElement {
           <Sidebar></Sidebar>
 
           <SheetFooter>
-            <SheetClose>
-              <UtilityButtons></UtilityButtons>
-            </SheetClose>
+            <div className="flex items-center justify-between py-4">
+              <Hints></Hints>
+              <SheetClose asChild>
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    if (!sortingAlgorithm) {
+                      toast({
+                        title: "Please select an algorithm",
+                        variant: "destructive",
+                      });
+                      return;
+                    }
+                    setIsSorting(true);
+                  }}
+                  disabled={isSorting}
+                >
+                  Start
+                </Button>
+              </SheetClose>
+            </div>
           </SheetFooter>
         </SheetContent>
       </Sheet>

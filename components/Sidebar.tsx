@@ -12,6 +12,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useStore } from "@/lib/zustand-store";
 import { useToast } from "./ui/use-toast";
+import { Play } from "lucide-react";
+import { Hints } from "./Hints";
 export default function Component() {
   const {
     setColor,
@@ -21,11 +23,17 @@ export default function Component() {
     setSoundSwap,
     setSortingAlgorithm,
     setSpeed,
-
+    soundIterate,
+    soundElementFound,
+    soundSwap,
     length,
     speed,
+    sortingAlgorithm,
+    isSorting,
+    setIsSorting,
   } = useStore();
 
+  const { toast } = useToast();
   return (
     <main className="flex-row flex w-full">
       <aside className="lg:max-w-4xl lg:p-6 lg:ring-white w-full lg:ring-1 shadow h-max lg:h-screen">
@@ -120,9 +128,17 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
-                Sound - Iterate
-              </Label>
+              <div className="flex items-center justify-between pb-1">
+                <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
+                  Sound - Iterate
+                </Label>
+                <Play
+                  className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
+                  onClick={() => {
+                    new Audio(soundIterate + ".mp3").play();
+                  }}
+                />
+              </div>
               <Select
                 defaultValue="scale"
                 onValueChange={(value) => {
@@ -141,9 +157,17 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
-                Sound - Swap
-              </Label>
+              <div className="flex items-center justify-between pb-1">
+                <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
+                  Sound - Swap
+                </Label>
+                <Play
+                  className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
+                  onClick={() => {
+                    new Audio(soundSwap + ".mp3").play();
+                  }}
+                />
+              </div>
               <Select
                 defaultValue="ding"
                 onValueChange={(value) => {
@@ -162,9 +186,17 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col">
-              <Label className="mb-2 font-medium" htmlFor="soundRightToLeft">
-                Sound - Element Found
-              </Label>
+              <div className="flex items-center justify-between pb-1">
+                <Label className="mb-2 font-medium" htmlFor="soundLeftToRight">
+                  Sound - Element found
+                </Label>
+                <Play
+                  className="h-4 w-4 cursor-pointer active:scale-90 hover:scale-100"
+                  onClick={() => {
+                    new Audio(soundElementFound + ".mp3").play();
+                  }}
+                />
+              </div>
 
               <Select
                 defaultValue="windchime"
@@ -184,46 +216,30 @@ export default function Component() {
             </div>
 
             <div className="hidden w-full lg:flex justify-between">
-              <UtilityButtons></UtilityButtons>
+              <div className="flex w-full items-center justify-between py-4 lg:p-0">
+                <Hints></Hints>
+
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    if (!sortingAlgorithm) {
+                      toast({
+                        title: "Please select an algorithm",
+                        variant: "destructive",
+                      });
+                      return;
+                    }
+                    setIsSorting(true);
+                  }}
+                  disabled={isSorting}
+                >
+                  Start
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </aside>
     </main>
-  );
-}
-
-export function UtilityButtons() {
-  const { isSorting, setIsSorting, sortingAlgorithm } = useStore();
-  const { toast } = useToast();
-  return (
-    <div className="flex w-full items-center justify-between py-4 lg:p-0">
-      <Button
-        disabled={true}
-        onClick={() => {
-          setIsSorting(false);
-        }}
-        variant={"outline"}
-      >
-        Stop
-      </Button>
-
-      <Button
-        type="submit"
-        onClick={() => {
-          if (!sortingAlgorithm) {
-            toast({
-              title: "Please select an algorithm",
-              variant: "destructive",
-            });
-            return;
-          }
-          setIsSorting(true);
-        }}
-        disabled={isSorting}
-      >
-        Start
-      </Button>
-    </div>
   );
 }

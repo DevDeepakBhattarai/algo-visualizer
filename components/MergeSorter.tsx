@@ -130,7 +130,7 @@ function TheUpperArray({ treeData }: { treeData: RawNodeDatum[] }) {
             </g>
           </svg>
         </DrawerTrigger>
-        <DrawerContent className="h-3/5">
+        <DrawerContent handleVisible={false} className="h-3/5">
           <DrawerHeader>
             <DrawerTitle className="text-center">
               Tree visualization of Merge Sort
